@@ -3,6 +3,9 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import notes from './api/notes.js';
+// import path from 'path';
+
 
 import authRouter from './auth/router.js';
 import publicRoute from './api/publicApi.js';
@@ -18,7 +21,14 @@ app.use(express.json());  // => req.body
 app.use(express.urlencoded({extended:true})); // req.body => from a form's key value pairs
 
 app.use(authRouter);
-app.use(publicRoute);
+app.use('/', publicRoute);
+app.use('/api/notes', notes);
+
+// app.use(express.static('client/build'))
+// app.get('/', (req,res) => {
+//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+
+// })
 
 app.use(notFound);
 app.use(errorHandler);
