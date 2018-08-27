@@ -21,7 +21,7 @@ authRouter.post('/api/signup', (req, res, next) => {
 });
 
 
-authRouter.get('/api/signin',auth, (req, res, next) => {
+authRouter.get('/api/signin', auth,(req, res, next) => {
   res.cookie('Token', req.token);
   res.send(req.token);
 });
@@ -38,10 +38,11 @@ authRouter.get('/api/free', auth, (req,res) => {
   // check to ensure that bearer auth is present. if not, no access.
   // call model methods here for specific task of route.
   // add email. add userId to schema of model to reference.
-  if(req.token){
+  console.log('-------->  ', req.headers.cookie);
+  if(!req.headers.cookie){
     res.send('no way jose');
   }
-  res.send('Here is all the ca$h');
+  res.send('Here is all the ca$hishss $$$');
 });
 
 authRouter.put('/api/freePut', auth, (req,res) => {

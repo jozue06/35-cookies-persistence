@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
 
 // Before we save, hash the plain text password
 userSchema.pre('save', function(next) {
+  console.log('saved pass')
   bcrypt.hash(this.password,10)
     .then(hashedPassword => {
       // Update the password for this instance to the hashed version
@@ -25,6 +26,7 @@ userSchema.pre('save', function(next) {
 // If we got a user/password, compare them to the hashed password
 // return the user instance or an error
 userSchema.statics.authenticate = function(auth) {
+  console.log('authded use')
   let query = {username:auth.username};
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
@@ -32,6 +34,7 @@ userSchema.statics.authenticate = function(auth) {
 };
 
 userSchema.statics.authorize = function(token) {
+  console.log('authzerd use')
   let parsedToken = jwt.verify(token, process.env.SECRET || 'changeit');
   let query = {_id:parsedToken.id};
   return this.findOne(query)
