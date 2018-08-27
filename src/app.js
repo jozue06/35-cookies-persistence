@@ -4,7 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import notes from './api/notes.js';
-// import path from 'path';
+import path from 'path';
 
 
 import authRouter from './auth/router.js';
@@ -24,11 +24,12 @@ app.use(authRouter);
 app.use('/', publicRoute);
 app.use('/api/notes', notes);
 
-// app.use(express.static('client/build'))
-// app.get('/', (req,res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+app.use(express.static('client/build'))
+app.get('/dashboard', (req,res) => {
+  console.log('giet dieash')
+  res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'))
 
-// })
+})
 
 app.use(notFound);
 app.use(errorHandler);

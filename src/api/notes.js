@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
         .then(notes => res.json(notes))
 });
 
+
 router.post('/', (req, res) => {
     const newNote = new Note({
         name: req.body.name,

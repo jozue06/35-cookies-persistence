@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.statusCode = 200;
   res.statusMessage = 'OK';
 
-  fs.readFile('./public/index.html', (err, data) => {
+  fs.readFile('../../client/public/login.html', (err, data) => {
     if(err) { throw err; }
     res.write(data);
     res.end();
