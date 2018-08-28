@@ -5,9 +5,10 @@ import NoteForm from './NoteForm'
 
 const NoteList = (props) => {
 
+ 
   return (  
     <ul>
-      <S.Text>{props.notes.map(Note => <li key={Note._id}>
+      <S.Text >{props.notes.map(Note => <li key={Note._id}>
       Title: 
         {Note.name} <br /> 
       Note Text: 
