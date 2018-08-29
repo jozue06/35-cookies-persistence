@@ -3,9 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import store from './reducers/store';
 import Dashboard from './components/Dashboard';
-import Home from './components/Home.js';
+import Landing from './components/Landing';
 import SignUp from './components/SignUp.js';
-// in future, get reactstrap for elements?
 
 class App extends Component {
   render() {
@@ -14,7 +13,7 @@ class App extends Component {
         <Provider store={store}>
           <BrowserRouter>
           <React.Fragment>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Landing} />
             <Route path='/dashboard' component={Dashboard}/>
             <Route path='/signup' component={SignUp}/>
           </React.Fragment>

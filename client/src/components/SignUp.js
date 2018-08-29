@@ -1,31 +1,33 @@
-import React, { Component, Fragment } from 'react';
+
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { signUpAction } from '../../action/logIn-action.js';
+import { signup } from '../reducers/auth';
+import S from './styles/styles.js'
 
 class SignUp extends Component {
   state = {
     username: '',
     password: '',
-    passwordConfirm: '',
+    passwordCheck: '',
     email: '',
   }
 
-  handleChange = (e) => {
-     this.setState({
+  handleChange = async (e) => {
+    await this.setState({
       [e.target.name]: e.target.value,
     });
 
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (this.state.password !== this.state.passwordConfirm) {
-      alert('passwords do not match');
-      this.setState({ password: '', passwordConfirm: '' });
+    if (this.state.password !== this.state.passwordCheck) {
+      alert('passwords do not match!');
+      this.setState({ password: '', passwordCheck: '' });
     } else {
-      this.props.signUpAction(this.state);
+      this.props.signup(this.state);
     }
   }
 
@@ -33,18 +35,18 @@ class SignUp extends Component {
     this.setState({
       username: '',
       password: '',
-      passwordConfirm: '',
+      passwordCheck: '',
       email: '',
     });
   }
 
   render() {
-    if (this.props.isLoggedIn) {
+    if (this.props.userState) {
       return <Redirect to='/dashboard' />;
     } else {
       return (
-        <Fragment>
-          <h3>Create an account</h3>
+        <S.Wrapper>
+          <S.Title>Create an account</S.Title>
 
           <form onSubmit={this.handleSubmit}>
 
@@ -71,26 +73,26 @@ class SignUp extends Component {
 
             <label>
               confirm password:
-              <input type="password" name="passwordConfirm" value={this.state.passwordConfirm} onChange={this.handleChange} />
+              <input type="password" name="passwordCheck" value={this.state.passwordCheck} onChange={this.handleChange} />
             </label>
 
             <br />
 
-            <input type="submit" value="sign up" />
+            <S.Button type="submit" value="sign up" />
 
           </form>
 
-        </Fragment>
+        </S.Wrapper>
 
       );
     }
   }
 }
 
-const matchStateToProps = state => ({ isLoggedIn: state.isLoggedIn })
+const matchStateToProps = state => ({ isLoggedIn: state.userState })
 
 const matchDispatchToProps = dispatch => ({
-  // signUpAction: newUser => dispatch(signUpAction(newUser)),
+  signup: newUser => dispatch(signup(newUser)),
 });
 
 export default connect(matchStateToProps, matchDispatchToProps)(SignUp);

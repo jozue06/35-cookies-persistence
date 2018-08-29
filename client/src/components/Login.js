@@ -7,8 +7,8 @@ export default class LogIn extends Component {
     password: '',
   }
 
-  handleChange = (e) => {
-    this.setState({
+  handleChange = async (e) => {
+   await this.setState({
       [e.target.name]: e.target.value,
     });
   }
