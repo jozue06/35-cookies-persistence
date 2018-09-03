@@ -2,15 +2,12 @@ import superagent from 'superagent';
 
 // Action type
 
-
 const authUrl = 'https://lab35-josh.herokuapp.com';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
-
 // Reducer
-  
   let initialState = false;
 
   export default (state = initialState, action) => {
@@ -45,25 +42,28 @@ export const LOGOUT = 'LOGOUT';
   
   //thunkers
   
-  export const login = (user) => {
+  export const loginReq = (user) => {
     return dispatch => {
+      console.log(user)
       superagent.get(`${authUrl}/login`)
         .auth(user.username, user.password)
         .then(res => {
-          localStorage.token = JSON.stringify(res.text);
+          console.log('fun')
+          let token = JSON.stringify(res.text)
+          localStorage.setItem('token', token);
           dispatch(logIn());
         })
     };
   };
   
-  export const logout = () => {
+  export const logoutReq = () => {
     return dispatch => {
       localStorage.removeItem('token');
       dispatch(logOut());
     };
   };
   
-  export const signup = (newUser) => {
+  export const signupReq = (newUser) => {
     return dispatch => {
       superagent.post(`${authUrl}/signup`)
         .send(newUser)

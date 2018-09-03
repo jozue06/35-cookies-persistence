@@ -15,7 +15,7 @@ export default class LogIn extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    await this.props.logIn(this.state);
+    await this.props.loginReq(this.state);
   }
 
   componentWillUnmount() {

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signup } from '../reducers/auth';
+import { signupReq } from '../reducers/auth';
 import S from './styles/styles.js'
 
 class SignUp extends Component {
@@ -27,7 +27,7 @@ class SignUp extends Component {
       alert('passwords do not match!');
       this.setState({ password: '', passwordCheck: '' });
     } else {
-      this.props.signup(this.state);
+      this.props.signupReq(this.state);
     }
   }
 
@@ -92,7 +92,7 @@ class SignUp extends Component {
 const matchStateToProps = state => ({ isLoggedIn: state.userState })
 
 const matchDispatchToProps = dispatch => ({
-  signup: newUser => dispatch(signup(newUser)),
+  signupReq: newUser => dispatch(signupReq(newUser)),
 });
 
 export default connect(matchStateToProps, matchDispatchToProps)(SignUp);
